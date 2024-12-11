@@ -1,20 +1,10 @@
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 generator client {
   provider = "prisma-client-js"
-}
-
-model users {
-  id         Int    @id @default(autoincrement())
-  first_name String
-  last_name  String
-  email      String
-  age        Int
-
-  // Weitere Spalten entsprechend deiner CSV-Datei
 }
 
 model bc_game {
@@ -27,10 +17,10 @@ model bc_game {
 }
 
 model bc_streaming_package {
-  id                                         Int                  @id @default(autoincrement())
+  id                                         Int                  @id //@default(autoincrement())
   name                                       String
-  monthly_price_cents                        Int
-  monthly_price_yearly_subscription_in_cents Int
+  monthly_price_cents                        Int?
+  monthly_price_yearly_subscription_in_cents Int?
   bc_streaming_offer                         bc_streaming_offer[]
 }
 
