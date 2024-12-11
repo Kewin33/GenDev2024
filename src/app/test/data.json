@@ -1,0 +1,46 @@
+{
+  "competitionsData": [
+    {
+      "name": "LeLiga",
+      "subCompetitions": [
+        "GER - FRA",
+        "ITA - GER",
+        "GEN - DEV",
+        "LUI - LEA"
+      ]
+    },
+    {
+      "name": "2. BL",
+      "subCompetitions": [
+        "Team A",
+        "Team B",
+        "Team C"
+      ]
+    },
+    {
+      "name": "3. BL",
+      "subCompetitions": [
+        "Team D",
+        "Team E",
+        "Team F"
+      ]
+    }
+  ],
+  "services": [
+    {
+      "name": "MegaSport",
+      "live": true,
+      "highlights": true
+    },
+    {
+      "name": "Prime Video",
+      "live": false,
+      "highlights": true
+    },
+    {
+      "name": "Premium",
+      "live": true,
+      "highlights": false
+    }
+  ]
+}
