@@ -1,7 +1,7 @@
 // app/layout.tsx
 
 import './globals.css'; // Importiere die Tailwind-Stile
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import Image from "next/image";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -9,12 +9,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <html lang="de">
       <head>
           <title>BallWatch</title>
-          {/*
+          {
               <link
                   href="https://fonts.googleapis.com/icon?family=Material+Icons"
                   rel="stylesheet"
               />
-          */}
+          }
       </head>
 
       <body className="min-h-screen flex flex-col bg-gray-100 text-gray-900">
@@ -34,7 +34,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <main className="flex-grow p-8 top-full">{children}</main>
 
       <footer className="text-center p-2 bg-gray-800 text-white w-full">
-        <p>&copy; 2024 BallWatch</p>
+          <p>&copy; 2024 BallWatch</p>
+          <p className="float-end"> Made with <i className="material-icons">favorite</i> from Kewin33 :) </p>
       </footer>
       </body>
       </html>
