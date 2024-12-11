@@ -1,0 +1,9 @@
+{
+  "competitionsData": [
+    {
+      "tournament_name": "Europameisterschaft 2024",
+      "subCompetitions": [Array]
+    }
+  ],
+  "streamingPackageNames": [ "ZDF - Free-TV", "ARD - Free-TV" ]
+}

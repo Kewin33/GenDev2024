@@ -1,0 +1,46 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model users {
+  id         Int    @id @default(autoincrement())
+  first_name String
+  last_name  String
+  email      String
+  age        Int
+
+  // Weitere Spalten entsprechend deiner CSV-Datei
+}
+
+model bc_game {
+  id                 Int                  @id @default(autoincrement())
+  team_home          String
+  team_away          String
+  starts_at          DateTime
+  tournament_name    String
+  bc_streaming_offer bc_streaming_offer[]
+}
+
+model bc_streaming_package {
+  id                                         Int                  @id @default(autoincrement())
+  name                                       String
+  monthly_price_cents                        Int
+  monthly_price_yearly_subscription_in_cents Int
+  bc_streaming_offer                         bc_streaming_offer[]
+}
+
+model bc_streaming_offer {
+  game_id              Int
+  game                 bc_game              @relation(fields: [game_id], references: [id])
+  streaming_package_id Int
+  streaming_package    bc_streaming_package @relation(fields: [streaming_package_id], references: [id])
+  live                 Int
+  highlights           Int
+
+  @@id([game_id, streaming_package_id])
+}
