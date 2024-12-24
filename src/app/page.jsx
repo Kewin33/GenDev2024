@@ -1,7 +1,6 @@
 'use client';
 import React, {useEffect, useRef, useState} from 'react';
 import SearchBar_backup from "./components/searchBar.jsx";
-import table from "./components/table.js";
 import Image from "next/image";
 
 const ComparisonTable = () => {
