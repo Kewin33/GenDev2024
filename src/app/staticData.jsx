@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import {competitionsData, services} from './data.json'
-import SearchBar from "./Components/searchBar.jsx";
+import SearchBar_backup from "./components/searchBar.jsx";
 
 const ComparisonTable = () => {
     const [openSections, setOpenSections] = useState({});
@@ -15,7 +15,7 @@ const ComparisonTable = () => {
 
     return (
         <>
-            <SearchBar/>
+            <SearchBar_backup/>
             <div className="overflow-x-auto p-4">
                 <table className="min-w-full border-collapse table-auto text-left text-sm">
                     <ComparisonHead/>

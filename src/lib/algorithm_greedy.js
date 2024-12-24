@@ -6,7 +6,12 @@
 // Output:
 // - cost
 // - combination (-1 if not possible)
-
+/**
+ *
+ * @param U
+ * @param S
+ * @returns {{rest: *, finalCosts: number, pickedSets: *[]}}
+ */
 export function greedySetCover(U, S) {
     console.time("greedySetCover with array")
     let finalCosts = 0
@@ -23,7 +28,8 @@ export function greedySetCover(U, S) {
     while (!U.every(e => coveredElements.includes(e)) ) {
         if(S.length === 0) {  // no solution
             let rest = U.filter(u => !coveredElements.includes(u));
-            return [pickedSets, finalCosts, rest]
+            console.log("no solution with rest: " + rest);
+            return {pickedSets, finalCosts, rest}
         }
         let lowest = S.reduce((min, obj) => obj.weight < min.weight ? obj : min)  // lowest ist {id, gameIds, weight,costPerElement}
         finalCosts += lowest.weight;
@@ -43,7 +49,7 @@ export function greedySetCover(U, S) {
         //console.log("coveredElements: " + coveredElements);
     }
     console.timeEnd("greedySetCover with array")
-    return [pickedSets, finalCosts]
+    return {pickedSets, finalCosts}
 }
 
 /*

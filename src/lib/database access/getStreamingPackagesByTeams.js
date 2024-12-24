@@ -39,7 +39,7 @@ export async function getGamesByTeams(teams, timeFrom = null, timeUntil = null, 
 }
 
 
-export async function getStreamingPackagesByTeams(gameIds, preferredStreamingPackages) {
+export async function getStreamingPackagesByTeams(gameIds, preferredStreamingPackages, live, highlight, abo) {
     console.time('getStreamingPackagesByTeams')
 
     //const gameIds = await getGamesByTeams(teams)
@@ -56,7 +56,9 @@ export async function getStreamingPackagesByTeams(gameIds, preferredStreamingPac
                 where: {
                     AND:[{
                         game_id: { in: gameIds },
-                        live: 1
+                        ...(live === 1 && {live: 1}),
+                        ...(highlight === 1 && {highlight: 1}),
+
                     }]
                 },
                 select: {
@@ -70,19 +72,10 @@ export async function getStreamingPackagesByTeams(gameIds, preferredStreamingPac
         }
     });
 
-// Formatiere die Ergebnisse
-    /*
-    let formattedResult = result.map(s => ({
-        streaming_package_id: s.id,
-        monthly_price_cents: s.monthly_price_cents,
-        monthly_price_yearly_subscription_in_cents: s.monthly_price_yearly_subscription_in_cents,
-        games: s.bc_streaming_offer.map(offer => offer.game.id) // Array von game.id
-    }))
-        .filter(f=> f.games.length !== 0);
-     */
+
 let formattedResult = result.map(s => ({
         id: s.id,
-        weight: s.monthly_price_yearly_subscription_in_cents,
+        weight: [s.monthly_price_cents !== null? s.monthly_price_cents:s.monthly_price_yearly_subscription_in_cents, s.monthly_price_yearly_subscription_in_cents, Math.min(s.monthly_price_yearly_subscription_in_cents, s.monthly_price_cents !== null? s.monthly_price_cents:s.monthly_price_yearly_subscription_in_cents)][abo],
         gameIds: s.bc_streaming_offer.map(offer => offer.game.id) // Array von game.id
     }))
         .filter(f=> f.gameIds.length !== 0);
@@ -93,3 +86,14 @@ let formattedResult = result.map(s => ({
 }
 
 //console.log(await getStreamingPackagesByTeams(["Schweiz","Deutschland"]));
+
+// Formatiere die Ergebnisse
+    /*
+    let formattedResult = result.map(s => ({
+        streaming_package_id: s.id,
+        monthly_price_cents: s.monthly_price_cents,
+        monthly_price_yearly_subscription_in_cents: s.monthly_price_yearly_subscription_in_cents,
+        games: s.bc_streaming_offer.map(offer => offer.game.id) // Array von game.id
+    }))
+        .filter(f=> f.games.length !== 0);
+     */

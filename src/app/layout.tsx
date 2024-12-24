@@ -3,6 +3,7 @@
 import './globals.css'; // Importiere die Tailwind-Stile
 import React, { ReactNode } from 'react';
 import Image from "next/image";
+import ScrollButton from "@/app/components/ScrollBtn";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -22,20 +23,26 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <nav className="flex items-center justify-between">
               <div className="flex items-center justify-between">
                   <a href="/"><Image src={"/images/logo.png"} alt={"logo"} width={50} height={30}/></a>
-                  <a href="/test" className="font-[Poppins] p-4">BallWatch</a>
+                  <a href="/" className="font-[Poppins] p-4">BallWatch</a>
               </div>
               <ul className="flex items-center">
-                  <li><a href="/about" className="hover:bg-blue-200 p-4 ">Über uns</a></li>
-                  <li><a href="/blog" className="hover:bg-blue-200 p-4">Blog</a></li>
+                  <li>
+                      <a href="/help" className="hover:text-black flex">
+                          Hilfe
+                          <i className="material-icons p-1 pt-0.5">help</i>
+                      </a>
+                  </li>
               </ul>
           </nav>
       </header>
 
       <main className="flex-grow p-8 top-full">{children}</main>
 
+      <ScrollButton></ScrollButton>
+
       <footer className="text-center p-2 bg-gray-800 text-white w-full">
           <p>&copy; 2024 BallWatch</p>
-          <p className="float-end"> Made with <i className="material-icons">favorite</i> from Kewin33 :) </p>
+          <p className="float-end"> Made with <i className="material-icons">favorite</i> by Kewin33 :) </p>
       </footer>
       </body>
       </html>

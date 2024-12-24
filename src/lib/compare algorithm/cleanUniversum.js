@@ -1,3 +1,5 @@
+//Deletes the games that are  not streamed by any of the streaming packages
+
 export default function cleanUniversum(gameIds, sets) {
     console.time('cleanUniversum');
 

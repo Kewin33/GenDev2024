@@ -1,12 +1,39 @@
+/**
+ *
+ * @param gameIds
+ * @param sets
+ * @returns {[*,*]|[number,null]|[*,*]|[*,*]}
+ */
+
 export function recursiveSetCover(gameIds, sets) {
     console.time('recursiveSetCover');
+    console.log("hello" + sets);
+    /*
+    let cache = []
+    while (sets.length > 0) {
+        for (let i = 1; i < sets.length; i++) {
+            if (sets[i].gameIds.every(id => sets[0].gameIds.includes(id))) sets.splice(i, 1);
+        }
+        cache.push(sets.shift())
+        //console.log(cache)
+    }
+    sets = cache
+
+     */
+
+    for (let i = 1; i < sets.length; i++) {
+        if (sets[i].gameIds.every(id => sets[0].gameIds.includes(id))) sets.splice(i, 1);
+    }
+    console.log(sets.map(s=> s.id));
     let result = recSetCover([], sets, gameIds, []);
     console.timeEnd('recursiveSetCover');
     return result
 }
 
 function recSetCover(covered, sets, gameIds, pickedSet) {
-
+    //console.log("rec call");
+    //console.log(pickedSet);
+    //console.log(sets);
 
     // Prüfe, ob alle Spiele abgedeckt sind
     if (gameIds.every(id => covered.includes(id))) {
