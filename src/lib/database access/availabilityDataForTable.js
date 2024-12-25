@@ -36,6 +36,7 @@ export async function availabilityDataForTable(gameIds, streamingPackageIds,notS
             id: true,
             team_home: true,
             team_away: true,
+            starts_at: true,
             tournament_name: true,
             bc_streaming_offer: {
                 where: {
@@ -49,7 +50,7 @@ export async function availabilityDataForTable(gameIds, streamingPackageIds,notS
             }
         },
         orderBy: {
-            tournament_name: 'asc'
+            tournament_name: 'asc',
         }
     });
 
@@ -73,6 +74,7 @@ export async function availabilityDataForTable(gameIds, streamingPackageIds,notS
             id: game.id,
             team_home: game.team_home,
             team_away: game.team_away,
+            starts_at: game.starts_at,
             liveHighlights: liveHighlightsArray
         };
 
@@ -88,6 +90,8 @@ export async function availabilityDataForTable(gameIds, streamingPackageIds,notS
 
         // Add the subtournament to the current tournament
         tournament.subCompetitions.push(subtournament);
+        tournament.subCompetitions.sort((a,b)=>new Date(a.starts_at) - new Date(b.starts_at))
+
 
         return acc;
     }, []);

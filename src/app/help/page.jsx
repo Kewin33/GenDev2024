@@ -86,6 +86,20 @@ const HelpPage = () => {
                             <span className="text-yellow-500 font-bold">Gelb</span>: Teilweise gestreamt
                         </p>
                     </li>
+                    {/* Vorschläge */}
+                    <li>
+                        <h3 className="text-xl font-semibold">4. Vorschläge</h3>
+                        <p>
+                            Es gibt 2 Versionen, einmal ein Packet für alles und eventuell falls es eine günstigere Kombination aus Anbietern gibt, dann eine günstigste Kombi.
+                        </p>
+                    </li>
+                    {/* Details */}
+                    <li>
+                        <h3 className="text-xl font-semibold">5.Details</h3>
+                        <p>
+                            Details zu den Anbietern w.z.B die Abonnenten, befinden sich am Ende der Tabelle.
+                        </p>
+                    </li>
                 </ul>
             </div>
 
@@ -118,7 +132,15 @@ const HelpPage = () => {
                         </p>
                     </li>
                     <li>
-                        <h3 className="text-xl font-semibold">5. "Server Error"</h3>
+                        <h3 className="text-xl font-semibold">5. Nicht alle Spiele angezeigt</h3>
+                        <p className="text-gray-600">
+                            Warnzeichen wird gezeigt.
+                            Die Kombination streamt die größtmögliche Anzahl an Spiele aber nicht alle!
+                            Wähle bitte mehr Anbieter aus um alle Spiele zu sehen.
+                        </p>
+                    </li>
+                    <li>
+                        <h3 className="text-xl font-semibold">6 . "Server Error"</h3>
                         <p className="text-gray-600">
                             Sollte ein Serverfehler auftreten, lade einfach die Seite neu.
                             Ich arbeite daran, die Stabilität zu verbessern. :)

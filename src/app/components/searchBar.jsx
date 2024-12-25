@@ -210,7 +210,7 @@ const SearchBar = ({ sendDataUp }) => {
     }
 
     return (
-        <div className="z-0 overflow-hidden">
+        <div className="overflow-visible">
             <ul className="flex justify-items-start flex-wrap mt-10 mb-4  overflow-auto">
                 {selectedTeams.map((team, index) => (
                     <li key={index} onClick={(e) => removeTeam(index, e)}>
@@ -233,7 +233,7 @@ const SearchBar = ({ sendDataUp }) => {
 
 
                 {filteredTeams.length > 0 && (
-                    <ul className="top-16 absolute w-full bg-white border border-gray-300 rounded-lg mt-1 max-h-48 shadow-lg overflow-visible z-50 ">
+                    <ul className="top-16 absolute w-full bg-white border border-gray-300 rounded-lg mt-1 max-h-48 shadow-lg overflow-y-scroll z-50 ">
                         {filteredTeams.map((team, index) => (
                             <li
                                 key={index}
@@ -393,7 +393,7 @@ const SearchBar = ({ sendDataUp }) => {
                 <div>
                     {
                         loading &&
-                        <div className="fixed flex flex-col items-center justify-center float-left right-4 h-32">
+                        <div className="absolute flex flex-col items-center justify-center float-left right-4 h-32">
                         <div className="w-10 h-10 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
                             <p className="text-blue-500 text-sm font-medium">Lemme think🤔</p>
                         </div>
