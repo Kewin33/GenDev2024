@@ -109,7 +109,7 @@ export async function singleRanking(request) {
     let service = result.map(pkg => {
         const streamedGames = pkg.bc_streaming_offer.map(offer => offer.game.id);
 
-        const weight = [pkg.monthly_price_cents || pkg.monthly_price_yearly_subscription_in_cents, pkg.monthly_price_yearly_subscription_in_cents, Math.min(pkg.monthly_price_cents || pkg.monthly_price_yearly_subscription_in_cents)][request.abo];
+        const weight = [pkg.monthly_price_cents || pkg.monthly_price_yearly_subscription_in_cents, pkg.monthly_price_yearly_subscription_in_cents, Math.min(pkg.monthly_price_cents || pkg.monthly_price_yearly_subscription_in_cents, pkg.monthly_price_yearly_subscription_in_cents)][request.abo];
 
         const percentageAllGames = totalGames.length > 0 ? streamedGames.length / totalGames.length : 0;
 
