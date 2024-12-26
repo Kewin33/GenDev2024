@@ -64,7 +64,6 @@ function ComparisonHead({tableData}) {
         <tr>
             <th className="border border-gray-300 bg-gray-100 p-2 text-center">Wettbewerbe</th>
             {tableData.streamingPackageNames.map((service, index) => (
-                <>
                     <th key={index} className={`overflow-visible border bg-gray-100 p-2 text-center relative ${tableData.packageCount[0] !== -1 && index === 0?"border-t-blue-800 border-t-4 bg-blue-200":tableData.packageCount[0] - 1 < index && index < tableData.packageCount[1]?"border-t-green-500 border-t-4 bg-green-100":""}`}>
 
                         {/*best kombi sign*/
@@ -89,7 +88,6 @@ function ComparisonHead({tableData}) {
 
 
                     </th>
-                </>
 
             ))}
         </tr>
@@ -175,23 +173,32 @@ const DetailsSection = ({ tableData, loadCosts }) => {
     const popupRef = useRef(null); // Reference to the popup
 
     const [showCosts, setShowCosts] = useState(false); // null means no popup is shown
-    const [costs, setCosts] = useState(Array(37).fill(null))
+    const [costs, setCosts] = useState(Array(37).fill({name:""}))
 
 
     const [streamingPackageDetails, setStreamingPackageDetails] = useState({})
 
+
+    function openCosts(){
+        setShowCosts(prevState => !prevState)
+    }
     //get costs beforehand to avoid delay
     const fetchCosts = async () => {
-        if(!showCosts){
-            for (let [index, service] of tableData.streamingPackageNames.entries()) {
-                await getCostOfStreamingPackage(service, index);
-            }
+        for (let [index, service] of tableData.streamingPackageNames.entries()) {
+            await getCostOfStreamingPackage(service, index);
         }
-        setShowCosts(prevState => !prevState)
 
     }
 
-    useEffect(()=>setShowCosts(false),[loadCosts])
+    useEffect(() => {
+        const fetchData = async () => {
+            setShowCosts(false);
+            setCosts(Array(37).fill({ name: "" }));
+            await fetchCosts();
+            setShowCosts(true);
+        };
+        fetchData();
+    }, [loadCosts]);
 
     //hide and show popup
     useEffect(() => {
@@ -233,25 +240,11 @@ const DetailsSection = ({ tableData, loadCosts }) => {
 
     return (
         <>
-            <tr className="p-2 mt-2 border-t-2 border-gray-600">
-                <td className="border border-gray-300 p-4 text-center flex justify-between items-center cursor-pointer" onClick={fetchCosts}>
-                    Details/Kosten der Anbieter
-                    <span>{showCosts ? '▲' : '▼'}</span>
-                </td>
-                {tableData.streamingPackageNames.map((service, index) => (
-                    <td key={index} className="border border-gray-300 bg-gray-100 p-4 text-center">
-                        <span><a
-                        href={"https://letmegooglethat.com/?q=" + encodeURIComponent(costs[index].name)}
-                        className="bg-blue-500 rounded p-2 text-black" target="_blank">Zum Anbieter</a>
-                        </span>
-                    </td>
-                ))}
-            </tr>
             {/* Kosten rows */}
             {
-                showCosts && (
+                 showCosts && (
                     <>
-                        <tr className="border-t-2 border-gray-600">
+                        <tr className=" border-t-2 border-gray-600">
                             <td className="border border-gray-300 bg-gray-100 p-2 text-center"> Monatsabo</td>
                             {tableData.streamingPackageNames.map((service, index) => (
                                 <td key={index} className="relative border border-gray-300 bg-white p-2 text-center">
@@ -271,6 +264,21 @@ const DetailsSection = ({ tableData, loadCosts }) => {
 
                 )
             }
+            <tr className="p-2 mt-2 border-t-2 border-gray-600">
+                <td className="border border-gray-300 p-4 flex text-center justify-between items-center cursor-pointer" onClick={openCosts}>
+                    Mehr Details
+
+                </td>
+                {tableData.streamingPackageNames.map((service, index) => (
+                    <td key={index} className="border border-gray-300 bg-gray-100 p-4 text-center">
+                        <span><a
+                        href={"https://letmegooglethat.com/?q=" + encodeURIComponent(costs[index].name) || ""}
+                        className="bg-blue-500 rounded p-2 text-black whitespace-nowrap" target="_blank">Zum Anbieter</a>
+                        </span>
+                    </td>
+                ))}
+            </tr>
+
 
 
         </>
