@@ -23,7 +23,7 @@ The Web App is hosted on Vercel. You can find the usage on the [help page](#http
 Click [here](#https://gen-dev2024.vercel.app/) to try out the Comparison Page.
 
 ### Video
-A video where I host the Webapp locally. It's a little bit faster than on vercel(takes about 0-5sec/req):
+A video where I hosted the webapp and database locally. It's a little bit faster than on vercel(takes about 0-5sec/req):
 https://www.loom.com/share/5651154a5ca548a59f3ef846e964c39f?sid=29acd38b-89b7-4f7e-9786-02565e7f9b77
 
 ## Features
