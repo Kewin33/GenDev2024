@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ballwatch
 
-## Getting Started
+![Author](https://img.shields.io/badge/Kewin33-red)
+![npm](https://img.shields.io/badge/npm-9.8.1-blue)
+![License](https://img.shields.io/badge/license-MIT-brightgreen)
 
-First, run the development server:
+## Project Description
+This project is a web application that compares streaming services for soccer games based on user preferences.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Table of Contents
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. [Usage](#Usage)
+2. [Development Approach](#development-approach)
+3. [Technologies Used](#technologies-used)
+4. [Features](#features)
+5. [Architecture](#architecture)
+6. [Database Schema](#database-schema)
+7. [Optimization Strategies](#optimization-strategies)
+8. [Future Improvements](#future-improvements)
 
-You can start editing the page by modifying `app/searchBar.jsx`. The page auto-updates as you edit the file.
+## Usage
+___
+The Web App is hosted on Vercel. You can find the usage on the [help page](#https://gen-dev2024.vercel.app/help). </br>
+Click [here](#https://gen-dev2024.vercel.app/) to try out the Comparison Page.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Features
+___
+### Basic Features
+- **Team Selection**: Users can select one or multiple teams to compare streaming packages.
+- **Streaming Package Ranking**: The app ranks streaming packages based on the availability of matches.
+- **Optimal Price Combination**: When a single package doesn't cover all matches, the app suggests the most affordable combination of packages.
+- **Efficient Search**: The search process is optimized to ensure reasonable response times without affecting user experience.
 
-## Learn More
+### Advanced Features
+- **Search Filters**: Includes filters such as date range, tournament, streaming preferences, and live/highlight options.
+- **User Search History**: Stores user search history locally in the browser, with a limit of the last 5 searches.
 
-To learn more about Next.js, take a look at the following resources:
+## Development Approach
+___
+- **Code Quality**:
+  I made sure to write clean, maintainable code throughout the project. Each function and module in the backend is properly commented, with clear explanations of parameters and return values. On the frontend, I broke everything down into smaller components, making the whole app easier to manage. Each file is kept to a reasonable size, keeping things neat and readable.
+- **Efficiency**:
+  The problem is based on the [Weighted Set Cover Problem](#https://en.wikipedia.org/wiki/Set_cover_problem#Weighted_set_cover). To solve it efficiently, I used a mix of greedy algorithms and a precise recursive approach. This helps minimize the size of the set and guarantees quick, accurate results. The WebApp is way slower though due to a slow but free database(takes about 0-30sec/req).
+- **User Interface**:
+  The UI is designed with a lot of care. I’ve made sure everything is intuitive and easy to use, with fast and accurate search results. I wanted users to have a smooth experience without unnecessary complexity.
+- **Innovation**:
+  Besides the basic features, I added a few extra touches to make the app more functional and engaging. Features like the filter options, search history, and links to streaming services make it stand out a bit more.
+- **Documentation**:
+  The code is well-commented and easy to follow. Plus, there’s a helpful page with clear instructions on how to use everything. You’ll find everything you need to get up and running.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## System Design
+___
+### Tech Stack
+- **Next.js**: React framework for building the web application.
+- **Prisma ORM**: Object-relational mapping tool to interact with MySQL database.
+- **NeonDb**: Relational database management system for storing data. (I firstly used Mysql for local testing)
+- **Tailwind CSS**: Utility-first CSS framework for responsive design.
+- **React**: JavaScript library for building user interfaces.
+- **Vercel**: Host of the web app.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+### Architecture
+The application is divided into several components that interact with each other:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Frontend (React + Next.js)**: Displays the user interface, including filters and the streaming comparison.
+2. **Backend (Next.js)**: Handles API requests, processes data, and interacts with the Prisma ORM to retrieve and calculates with the data from the database.
+3. **Database (NeonDb + Prisma ORM)**: Stores all relevant data for teams, tournaments, streaming services, and search history.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Database Schema
+Containing these given tables:
+- **Games**: Events where two teams compete, scheduled on specific dates within a tournament.
+- **Streaming Packages**: Subscription services from providers like Magenta, Sky, etc., offering live or on-demand access to games with monthly or yearly pricing options. These packages are listed in the result overview.
+- **Streaming Offers**: These offers specify the availability of a game within a streaming package, detailing whether it's available live or as on-demand highlights. Both options are included in the comparison results.
+
+The Prisma schema is defined in the [`schema.prisma`](./prisma/schema.prisma) file.
+
+
+## Future Improvements
+___
+There's always room for improvement, and here are some features I couldn't implement in time:
+
+- **Streaming Service Icons**: Add icons for streaming services to make the comparison more visually engaging.
+- **Enhanced Game Details**: Provide additional game information, such as scores, locations, or other relevant details.
+- **User Authentication**: Integrate user login functionality to allow users to save their preferences and search history across sessions, offering a more personalized experience.
+- **Optimized Set Cover Algorithm**: Improve the efficiency of the set cover algorithm for faster results or potentially explore the use of a faster database ;).
+
+
+## License
+___
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details :)

@@ -90,7 +90,9 @@ const HelpPage = () => {
                     <li>
                         <h3 className="text-xl font-semibold">4. Vorschläge</h3>
                         <p>
-                            Es gibt 2 Versionen, einmal ein Packet für alles und eventuell falls es eine günstigere Kombination aus Anbietern gibt, dann eine günstigste Kombi.
+                            Es gibt zwei Optionen für Vorschläge:
+                            1. Ein Paket, das alle gewünschten Leistungen umfasst.
+                            2. Falls es eine günstigere Kombination aus Anbietern gibt, wird eine Option mit der kostengünstigsten Kombination angezeigt.
                         </p>
                     </li>
                     {/* Details */}
