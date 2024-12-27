@@ -1,39 +1,47 @@
-import {greedySetCover} from "../algorithm_greedy.js";
-import {recursiveSetCover} from "./recursiveSetCover.js";
-import cleanUniversum from "./cleanUniversum.js";
+import { greedySetCover } from "./algorithm_greedy.js";
+import { recursiveSetCover } from "./recursiveSetCover.js";
 
 /**
+ * Führt zuerst den Greedy-Set-Cover-Algorithmus aus und dann den rekursiven Algorithmus,
+ * um die bestmögliche Kombination von Sets zu finden.
  *
- * @param gameIds
- * @param sets
- * @returns {{pickedSets: *, weight: *}}
+ * @param gameIds - Die IDs der Spiele, die abgedeckt werden sollen
+ * @param sets - Die verfügbaren Sets, die Spiele abdecken können
+ * @returns {{pickedSets: *, weight: *, rest: *}} - Das Ergebnis mit den ausgewählten Sets, dem Gewicht und den restlichen Spielen
  */
-export function greedyThenRecursiveSetCover(gameIds,sets) {
+export function greedyThenRecursiveSetCover(gameIds, sets) {
     console.time("greedyThenRecursiveSetCover");
-    //console.log(gameIds);
-    //console.log(sets);
-    let greedy = greedySetCover(gameIds,sets);  //[pickedSets, weight]
-    console.log("Result greedy " + greedy.pickedSets);
 
-    let idk = sets.filter(s=> greedy.pickedSets.includes(s.id))
-    //console.log(idk.map(s => [s.gameIds,s.weight]));
-    //console.log(greedy);
-    if ('rest' in greedy){
+    // 1. Greedy-Algorithmus durchführen
+    let greedy = greedySetCover(gameIds, sets);  // [pickedSets, weight]
+    console.log("Result greedy: ", greedy.pickedSets);
+
+    // 2. Falls ein Rest vorhanden ist, aktualisieren wir die Spiel-IDs
+    if ('rest' in greedy) {
         console.log("rest detected");
-        //console.log("gameIds" + gameIds);
-        greedy.rest =
-        gameIds = gameIds.filter(gid=> !greedy.rest.includes(gid))
-        //console.log("gameIds" + gameIds);
-    } else greedy = {...greedy,rest:[]}
-    let result = recursiveSetCover(gameIds,idk);
+        // Spiele, die nicht abgedeckt wurden, aus den gameIds entfernen
+        gameIds = gameIds.filter(gid => !greedy.rest.includes(gid));
+        // Rückgabe der restlichen Spiele für spätere Berechnungen
+    } else {
+        greedy.rest = [];  // Keine Rest-Spiele, falls nicht vorhanden
+    }
+
+    // 3. Rekursiver Set-Cover-Algorithmus mit den übrig gebliebenen Spielen und Sets
+    let result = recursiveSetCover(gameIds, sets.filter(s => greedy.pickedSets.includes(s.id)));
+
     if (result[1] === null) {
         console.log("recursiveSetCover failed");
         console.timeEnd("greedyThenRecursiveSetCover");
-        return {weight: greedy.weight, pickedSets: greedy.pickedSets, rest: greedy.rest}
+        return { weight: greedy.weight, pickedSets: greedy.pickedSets, rest: greedy.rest };
     }
-    console.log("Result rec " + result[1]);
+
+    console.log("Result rec: ", result[1]);
     console.timeEnd("greedyThenRecursiveSetCover");
-    console.log("test");
-    console.log(greedy.rest);
-    return {weight:result[0], pickedSets: result[1], rest: greedy.rest}
+
+    // 4. Rückgabe der Ergebnisse, einschließlich der gewählten Sets und des Restes
+    return {
+        weight: result[0],  // Gewicht aus der rekursiven Berechnung
+        pickedSets: result[1],  // Die Sets, die von der rekursiven Berechnung ausgewählt wurden
+        rest: greedy.rest  // Die nicht abgedeckten Spiele (Rest)
+    };
 }

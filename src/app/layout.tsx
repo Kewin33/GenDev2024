@@ -1,9 +1,9 @@
 // app/layout.tsx
 
-import './globals.css'; // Importiere die Tailwind-Stile
+import './globals.css';
 import React, { ReactNode } from 'react';
 import Image from "next/image";
-import ScrollButton from "@/app/components/ScrollBtn";
+import ScrollButton from "./components/ScrollBtn";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -40,9 +40,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
       <ScrollButton></ScrollButton>
 
-      <footer className="text-center p-2 bg-gray-800 text-white w-full">
+      <footer className="relative text-center p-2 bg-gray-800 text-white w-full">
           <p>&copy; 2024 BallWatch</p>
           <p className="float-end"> Made with <i className="material-icons">favorite</i> by Kewin33 :) </p>
+          <a className="flex flex-col absolute top-6 left-3 sm:top-3 text-white" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+              <span className="hidden sm:block"> Report a bug</span>
+              <i className="material-icons">bug_report</i>
+          </a>
       </footer>
       </body>
       </html>
