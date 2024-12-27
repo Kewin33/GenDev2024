@@ -10,13 +10,11 @@ This project is a web application that compares streaming services for soccer ga
 ## Table of Contents
 
 1. [Usage](#Usage)
-2. [Development Approach](#development-approach)
-3. [Technologies Used](#technologies-used)
-4. [Features](#features)
-5. [Architecture](#architecture)
-6. [Database Schema](#database-schema)
-7. [Optimization Strategies](#optimization-strategies)
-8. [Future Improvements](#future-improvements)
+2. [Features](#features)
+3. [Development Approach](#development-approach)
+4. [System Design](#system-design)
+5. [Future Improvements](#future-improvements)
+6. [License](#license)
 
 ## Usage
 ___
