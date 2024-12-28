@@ -19,8 +19,8 @@ This project is a web application that compares streaming services for soccer ga
 ## Usage
 ___
 ### Web App
-The Web App is hosted on Vercel. You can find the usage on the [help page](#https://gen-dev2024.vercel.app/help). </br>
-Click [here](#https://gen-dev2024.vercel.app/) to try out the Comparison Page.
+The Web App is hosted on Vercel. You can find the usage on the [help page](https://gen-dev2024.vercel.app/help). </br>
+Click [here](https://gen-dev2024.vercel.app/) to try out the Comparison Page.
 
 ### Video
 A video where I hosted the webapp and database locally. It's a little bit faster than on vercel(takes about 0-5sec/req):</br>
@@ -56,7 +56,7 @@ ___
 ___
 ### Tech Stack
 - **Next.js**: React framework for building the web application.
-- **Prisma ORM**: Object-relational mapping tool to interact with MySQL database.
+- **Prisma ORM**: Object-relational mapping tool to interact with MySQL/Postgres database.
 - **NeonDb**: Relational database management system for storing data. (I firstly used Mysql for local testing)
 - **Tailwind CSS**: Utility-first CSS framework for responsive design.
 - **React**: JavaScript library for building user interfaces.
